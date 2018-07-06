@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace FirstApplloService
 {
@@ -6,7 +7,14 @@ namespace FirstApplloService
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            ApolloClient client = new ApolloClient();
+            client.LinkTCP();
+            client.Broker_Public();
+
+            //10秒之后自动关闭
+            Thread.Sleep(10000);
+            client.Broker_Disconnect();
+            Console.ReadKey();
         }
     }
 }
